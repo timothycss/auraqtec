@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraQtek</title>
+    <style>
+    /* General styling for header */
+    header {
+        background: linear-gradient(to right, #000000, #000000); /* Gradient background */
+        color: rgb(255, 255, 255); /* White text */
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        justify-content: space-between; /* Space between title and nav */
+        align-items: center; /* Center items vertically */
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Add shadow to the header */
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        flex: 1; /* Allow the title to take up space */
+        text-align: center; /* Center the title on smaller screens */
+    }
+/* Navigation Styles */
+    .main-nav {
+      background: rgba(255, 255, 255, 0.096);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0;
+      height: 75px;
+      position: fixed;
+      border: 0px solid rgba(0, 0, 0, 0.1);
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.233);
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      justify-content: space-between;
+      padding: 0 14px;
+      height: 64px;
+    }
+
+   .nav-logo {
+      width: 200px;
+      margin-top: 35px;
+      height: auto;
+      margin-right: 90px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+      
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: #000222;
+      text-decoration: none;
+      font-weight: 400;
+      position:relative;
+      padding: 6px 0;
+      font-size: 1rem;
+      transition: color 0.10s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #00e200;
+      transform: scaleX(0);
+      transition: transform 0.10s ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: 0;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1100;
+    }
+@media (max-width: 900px) {
+  .hero-content {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    padding: 0 10px !important;
+  }
+  .hero-content h1 {
+    font-size: 2em !important;
+  }
+  .hero-content p {
+    font-size: 1em !important;
+  }
+}
+@media (max-width: 600px) {
+  .hero-content {
+    padding: 0 5px !important;
+    top: 30% !important; /* Move up slightly on mobile */
+    transform: translate(-50%, -40%) !important;
+  }
+  .hero-content h1 {
+    font-size: 1.4em !important;
+  }
+  .hero-content p {
+    font-size: 0.95em !important;
+  }
+}
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background: #007000;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+/* ...existing code... */
+@media (max-width: 900px) {
+  #liveChatButton {
+    display: none !important;
+  }
+}
+/* ...existing code... */
+    @media (max-width: 900px) {
+      .nav-content {
+        position: relative;
+        flex-direction: row;
+        height: 54px;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100vw;
+        background: rgba(255,255,255,0.98);
+        padding: 20px 0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        z-index: 100;
+        gap: 0;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        display: block;
+        padding: 16px 0;
+        font-size: 1.1rem;
+        width: 100%;
+      }
+      .nav-content .buy-btn {
+        display: none !important;
+      }
+    }
+    @media (min-width: 901px) {
+      .nav-links {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        width: auto;
+      }
+    }
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh; /* Match slider height */
+      background: linear-gradient(135deg, rgba(1, 20, 107, 0.26), rgba(27, 14, 39, 0.315));
+      z-index: 2;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .video-overlay {
+        height: 80vh !important; /* Match tablet slider height */
+        min-height: 320px !important; /* Increased minimum height */
+      }
+    }
+    @media (max-width: 600px) {
+      .video-overlay {
+        height: 60vh !important; /* Match mobile slider height */
+        min-height: 180px !important; /* Increased minimum height */
+      }
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      max-width: 700px;
+      transform: translate(-50%, -50%);
+      margin: 0 auto;
+      opacity: 0;
+      transition: opacity 1s;
+      z-index: 3;
+      text-align: center;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-content.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 24px rgba(31,38,135,0.25);
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #ffffff;
+      margin-bottom: 28px;
+      text-shadow: 0 2px 8px rgba(31,38,135,0.18);
+    }
+   
+    @media (max-width: 700px) {
+      .video-hero, .bg-video, .video-overlay {
+        min-height: 60vh;   /* Increased from 40vh */
+        height: 60vh;       /* Increased from 40vh */
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+    nav ul {
+        list-style-type: none; /* Remove bullets */
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        justify-content: center; /* Center navigation items */
+        gap: 15px; /* Add spacing between items */
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    nav ul li a {
+        text-decoration: none; /* Remove underline */
+        color: rgb(0, 0, 0); /* Text color */
+        font-weight: bold;
+        font-size: 1.2em;
+        transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    nav ul li a:hover {
+        color: #ffcc00; /* Change text color on hover */
+
+        padding: 5px 10px; /* Add padding for better hover effect */
+        border-radius: 5px; /* Rounded corners for the hover background */
+    }
+
+    /* Change nav link color on hover */
+    nav ul li a:hover {
+        color: rgb(0, 0, 0); /* Green color on hover */
+        transition: color 0.3s ease; /* Smooth transition effect */
+    }
+
+    /* Slider styling */
+    .slider {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Full viewport height */
+        overflow: hidden;
+    }
+
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+        width: 100%; /* Full width for all devices */
+        height: 100%; /* Full height for all devices */
+        object-fit: cover; /* Ensures the image covers the container without distortion */
+        position: relative;
+        top: -50px; /* Moves the image upwards */
+        animation-fill-mode: forwards; /* Ensure the animation stays in the final position */
+    }
+
+    /* Arrow styling */
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2em;
+        color: rgb(150, 63, 250);
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        cursor: pointer;
+        border: none;
+        z-index: 10;
+        text-decoration: none;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        33% { transform: translateX(-100%); }
+        66% { transform: translateX(-200%); }
+        100% { transform: translateX(0); }
+    }
+
+    /* Rotating effect for the logo */
+    @keyframes rotateLogo {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .rotating-logo {
+        animation: rotateLogo 5s linear infinite; /* Rotate every 5 seconds infinitely */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column; /* Stack header elements vertically */
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2em; /* Reduce font size for smaller screens */
+        }
+
+        nav ul {
+            flex-direction: column; /* Stack navigation items vertically */
+            gap: 10px; /* Reduce spacing between items */
+        }
+
+        nav ul li a {
+            font-size: 1em; /* Reduce font size for smaller screens */
+        }
+
+        .slider {
+            height: 70vh; /* Reduce slider height for smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 1.8em; /* Further reduce font size for very small screens */
+        }
+
+        nav ul li a {
+            font-size: 0.9em; /* Further reduce font size for very small screens */
+        }
+
+        .slider {
+            height: 60vh; /* Further reduce slider height for very small screens */
+        }
+    }
+
+    @keyframes fadeText {
+        0%, 33% {
+            opacity: 1;
+        }
+        50%, 100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes flyIn {
+        0% {
+            transform: translateX(-100%); /* Start off-screen to the left */
+            opacity: 0;
+        }
+        50% {
+            transform: translateX(10%); /* Slight overshoot for a dynamic effect */
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(0); /* Settle into the final position */
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: scale(10); /* Optional: Add a slight zoom effect */
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1.1); /* Reset zoom */
+        }
+    }
+    @keyframes slideIn {
+        0% {
+            opacity: 0;
+            transform: translateX(100%); /* Start from the right */
+        }
+        50% {
+            opacity: 1;
+            transform: translateX(0); /* Center position */
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(-100%); /* Exit to the left */
+        }
+    }
+    /* Animation for the image */
+    @keyframes fadeInSlideUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px); /* Start slightly below */
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0); /* End at the original position */
+        }
+    }
+    /* Keyframes for fade and zoom animation without slide effect */
+    @keyframes fadeZoom {
+        0% {
+            
+            opacity: 0;
+            transform: scale(1.1); /* Slight zoom-in effect */
+        }
+        25% {
+            opacity: 1;
+            transform: scale(1); /* Normal size */
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1); /* Hold the image */
+        }
+        75% {
+            opacity: 0;
+            transform: scale(1.1); /* Zoom-out effect */
+        }
+        100% {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+    }
+
+    /* Make slider images fully responsive for all screen sizes */
+.slider {
+  width: 100vw !important;
+  max-width: 100% !important;
+  height: 100vh !important;
+  min-height: 250px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.slides {
+  width: 100vw !important;
+  height: 100% !important;
+  display: flex !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.slides img {
+  width: 100vw !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  min-height: 250px !important;
+  object-fit: cover !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+/* Tablet adjustments */
+@media (max-width: 900px) {
+  .slider {
+    height: 74vh !important;      /* Increased from 60vh */
+    min-height: 320px !important; /* Increased minimum height */
+  }
+  .slides img {
+    height: 74vh !important;      /* Increased from 60vh */
+    min-height: 320px !important; /* Increased minimum height */
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .slider {
+    height: 54vh !important;      /* Increased from 40vh */
+    min-height: 180px !important; /* Increased minimum height */
+  }
+  .slides img {
+    height: 54vh !important;      /* Increased from 40vh */
+    min-height: 180px !important; /* Increased minimum height */
+  }
+}
+    </style>
+    /* Hide live chat button on tablet and phone */
+    @media (max-width: 900px) {
+      #liveChatButton {
+        display: none !important;
+      }
+    }
+</head>
+<body>
+
+    
+
+     <!-- Navigation Bar -->
+  <nav class="main-nav">
+    <div class="menu-toggle" id="menuToggle"> 
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+    <div class="nav-content">
+      <img src="D:\AURAQTEK\images\AURAQ LOGO.png" alt="AuraQ Logo" class="nav-logo">
+     <ul class="nav-links">
+        <li><a href="file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana.html#sales"> <strong>Home</strong></a></li>
+        <li><a href=file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana%20ABOUT.html> <strong>About</strong></a></li>
+        <li><a href=file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana%20Explore%20our%20HOMES.html> <strong>Services</strong></a></li>
+        <li><a href=file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana%20REVIEW.html> <strong>Store</strong></a></li>
+         <li><a href=file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana%20contact.html> <strong>Contact</strong></a></li>
+         <li><a href=file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana%20contact.html> <strong>Gallery</strong></a></li>
+         <li><a href=file:///C:/Users/SSIRTIMO/Desktop/pendulum-spaces/Pendulum%20Spaces%20-%20Real%20Estate%20in%20Ghana%20contact.html> <strong>Reviews</strong></a></li>
+      </ul>
+      <!-- Live Chat Button -->
+<div style="position: absolute; top: 15px; right: 100px; z-index: 1000;">
+    <button id="liveChatButton" style="background-color: rgb(2, 153, 14); color: white; border: none; border-radius: 50px; padding: 10px 20px; font-size: 1em; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease;">
+        💬 <span style="color: black;">Live Chat</span>
+    </button>
+</div>
+    </div>
+  </nav>
+    <!-- Slider Images -->
+    <div class="slider" style="height: 100vh; position: relative; overflow: hidden;">
+        <div class="slides" style="width: 100%; height: 100%; position: absolute;">
+            <img src="D:\AURAQTEK\images\image_fx (4).jpg" alt="Slide 1" style="width: 125%; height: 100%; object-fit: cover; position: absolute;">
+            <img src="D:\AURAQTEK\images\image_fx (3).jpg" alt="Slide 2" style="width: 100%; height: 115%; object-fit: cover; position: absolute; opacity: 0; animation: fadeIn 12s ease-in-out forwards;">
+            <img src="D:\AURAQTEK\images\values.webp" alt="Slide 3" style="width: 100%; height: 115%; object-fit: cover; position: absolute; opacity: 0;">
+            <img src="D:\AURAQTEK\images\image_fx (7).jpg" alt="Slide 4" style="width: 100%; height: 120%; object-fit: cover; position: absolute; opacity: 0; animation: slideIn 25s ease-in-out infinite;">
+        </div>
+    </div>
+<div class="video-overlay"></div>
+  <div class="hero-content">
+    <h1>Make an ideal Home <br> with Auraq Serene Domicile</h1>
+    <p>Your trusted real estate partner in Ghana for house rentals and property sales.</p>
+   
+  </div>
+  <div class="hero-content active">
+    <h1>Your Home, <br> Your Comfort</h1>
+    <p>We offer you affordable houses for sale and rent at affordable prices.</p>
+    
+  </div>
+  <div class="hero-content">
+    <h1>Your satisfaction, <br>Our mission</h1>
+    <p>Discover a new standard in real estate—where your needs come first and your satisfaction is our mission.</p>
+   
+  </div>
+</div>
+   
+    <!-- What About Us Section -->
+    <div class="about-section" style="display: flex; align-items: center; justify-content: space-between; padding: 40px; background-color: #f9f9f9; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <!-- Text Section -->
+        <div style="flex: 1; padding-right: 20px;">
+            <p style="font-size: 1.6em; line-height: 1.6;">
+                <strong style="font-size: 2.5em;">What About Us?</strong> <br>
+                <strong>AURAQ DIGITAL KONSULT</strong> is a leading IT solutions provider dedicated to empowering businesses with innovative technology and exceptional service. 
+                Our team of experts delivers tailored solutions to drive efficiency, enhance productivity, and foster growth.
+            </p>
+            <!-- Learn More Button -->
+            <a href="#services" style="display: inline-block; margin-top: 20px; padding: 10px 20px; font-size: 1em; font-weight: bold; color: white; background-color: rgb(20, 241, 0); text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease; border: 2px solid transparent; border-image: linear-gradient(to right, rgb(20, 241, 0), transparent) 1;">
+                Learn More
+            </a>
+        </div>
+        <!-- Image Section -->
+        <div style="flex: 1; text-align: right;">
+            <img id="visionImage" src="D:\AURAQTEK\images\vision.jpg" alt="Vision" style="width: 100%; max-width: 720px; border-radius: 10px; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+        </div>
+
+        <script>
+            // Function to check if an element is in the viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            // Add scroll event listener
+            document.addEventListener('scroll', function () {
+                const image = document.getElementById('visionImage');
+                if (isInViewport(image)) {
+                    image.style.opacity = '1';
+                    image.style.transform = 'translateY(0)';
+                } else {
+                    // Reset animation when the image leaves the viewport
+                    image.style.opacity = '0';
+                    image.style.transform = 'translateY(20px)';
+                }
+            });
+        </script>
+    </div>
+
+    <!-- Background Image Section 2 -->
+    <div id="backgroundSection2" style="width: 100%; height: 400px; background: url('file:///D:/AURAQTEK/images/image_fx%20(4).jpg') no-repeat center center; background-size: cover; opacity: 0; transition: opacity 1s ease-in-out;">
+    </div>
+
+    <script>
+        // Function to check if an element is in the viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Add scroll event listener to fade in the background image
+        document.addEventListener('scroll', function () {
+            const backgroundSection = document.getElementById('backgroundSection2');
+            if (isInViewport(backgroundSection)) {
+                backgroundSection.style.opacity = '1'; // Fade in when in view
+            } else {
+                backgroundSection.style.opacity = '0'; // Reset opacity when out of view
+            }
+        });
+    </script>
+
+    <!-- Our Services Section -->
+    <div class="services-section" style="text-align: center; padding: 40px; margin-top: -10px; background-color: #ffffff; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <h2 style="font-size: 2.5em; margin-bottom: 20px; color: #000000;">Our Services</h2>
+        <p style="font-size: 1.6em; line-height: 2.4rem; margin-bottom: 40px; color: #000000;">
+            We offer a wide range of IT solutions tailored to meet the unique <br>needs of your business. From software development to IT consulting, <br> we are here to help you succeed.
+        </p>
+        <div class="services-container" style="display: flex; justify-content: center; gap: 20px;">
+            <!-- Service 1 -->
+            <div class="service fade-in" style="flex: 1; max-width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(148, 148, 148, 0.1); background-color: #1a1a1a; color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+                <h3 style="font-size: 2em; line-height: 2em; margin-bottom: 10px;">Software Development</h3>
+                <p style="font-size: 1.2em;">Custom software development to streamline your business processes. 
+                    We design, develop, and deploy custom software solutions tailored to your business requirements. Our expertise includes:
+                    Web development,
+                    Mobile app development,
+                    Enterprise software solutions.
+                </p>
+            </div>
+            <!-- Service 2 -->
+            <div class="service fade-in" style="flex: 1; max-width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(148, 148, 148, 0.1); background-color: #1a1a1a; color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+                <h3 style="font-size: 2em; line-height: 2em; margin-bottom: 10px;">Graphic Design</h3>
+                <p style="font-size: 1.2em;">Our graphic designers create visually stunning designs for:
+                    Logos and branding,
+                    Brochures and flyers,
+                    Business cards and stationery,
+                    Digital graphics and social media assets.
+                </p>
+            </div>
+            <!-- Service 3 -->
+            <div class="service fade-in" style="flex: 1; max-width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(148, 148, 148, 0.1); background-color: #1a1a1a; color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+                <h3 style="font-size: 2em; line-height: 2em; margin-bottom: 10px;">Printing Services</h3>
+                <p style="font-size: 1.2em;">We offer high-quality printing services, including:
+                    <strong>Format Printing:</strong> Posters, banners, signage, and exhibition displays,
+                    <strong>Paper Print:</strong> Business cards, brochures, flyers, and stationery.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to check if an element is in the viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Add scroll event listener to fade in services
+        document.addEventListener('scroll', function () {
+            const services = document.querySelectorAll('.service');
+            services.forEach((service, index) => {
+                if (isInViewport(service)) {
+                    setTimeout(() => {
+                        service.style.opacity = '1';
+                        service.style.transform = 'translateY(0)';
+                    }, index * 300); // Delay each service by 300ms
+                } else {
+                    // Reset animation when the service leaves the viewport
+                    service.style.opacity = '0';
+                    service.style.transform = 'translateY(20px)';
+                }
+            });
+        });
+    </script>
+          <!-- Meet Our IT Team Section -->
+<div class="team-section" style="display: flex; align-items: center; padding: 40px; background-color: #f9f9f9; color: #000000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-left: 20px;">
+    <!-- Image Section -->
+    <div style="flex: 1; text-align: center;">
+        <img id="animatedImage" src="D:\AURAQTEK\images\image_fx (3).jpg" alt="IT Team" style="width: 300%; max-width: 620px; border-radius: 10px; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+    </div>
+    <!-- Text Section -->
+    <div style="flex: 2; text-align: justify; margin-left: 450px;">
+        <h2 style="font-size: 2.5em; margin-bottom: 20px;">Meet Our IT Team</h2>
+        <p style="font-size: 1.6em; line-height: 1.3; text-align: left;">
+            Our IT team is the backbone of our company's technology infrastructure, driving innovation and ensuring seamless operations. Comprised of skilled professionals, our team delivers expert solutions, support, and guidance to empower our organization’s growth and success.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Function to check if an element is in the viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Add scroll event listener
+    document.addEventListener('scroll', function () {
+        const image = document.getElementById('animatedImage');
+        if (isInViewport(image)) {
+            image.style.opacity = '1';
+            image.style.transform = 'translateY(0)';
+        } else {
+            // Reset animation when the image leaves the viewport
+            image.style.opacity = '0';
+            image.style.transform = 'translateY(20px)';
+        }
+    });
+</script>
+   
+
+<script>
+    // Add click event listener to the live chat button
+    document.getElementById('liveChatButton').addEventListener('click', function () {
+        alert('Live Chat feature coming soon!');
+    });
+</script>
+
+<!-- Fixed Background Image Section -->
+<div style="width: 100%; height: 800px; background: url('file:///D:/AURAQTEK/images/image_fxv.jpg') no-repeat center center fixed; background-size: cover;">
+</div>
+<!-- Black Background Section -->
+<div style="width: 100%; height: 650px; background-color: rgb(9, 9, 17); color: rgb(0, 238, 40); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: relative; padding-top: 20px;">
+    <!-- Image Positioned to the Left -->
+    <div style="position: absolute; top: 35%; left: 80px; transform: translateY(-50%);">
+        <img src="D:\AURAQTEK\images\image_fx (9).jpg" alt="Image FX 9" style="width: 550px; height: auto; border-radius: 10px;">
+        <img src="D:\AURAQTEK\images\image_fx (8).jpg" alt="Image FX 8" style="width: 550px; height: auto; border-radius: 10px; position: absolute; top: 80%; left: 20px;">
+    </div>
+    <!-- Content Section -->
+    <h2 style="font-size: 1.4em; text-align: center; margin-top: 40px; position: relative; left: 80px;"> Our Values</h2>
+    <p style="font-size: 3.5em; text-align: center; line-height: 1em; font-family: Arial, Helvetica, sans-serif; color: #f9f9f9;  margin-top: 20px; position: relative; left: 360px;">
+        <strong>The culture that drives us.</strong>
+    </p>
+    <!-- Logo Positioned on the Text -->
+    <div style="text-align: center; margin-top: -60px;">
+        <img src="D:\AURAQTEK\images\OUR VALUES LOGO.png" alt="Our Values Logo" style="width: 400px; height: auto; border-radius: 10px; position: relative; left: 190px;">
+    </div>
+    <!-- Text Section -->
+    <div style="flex: 2; margin-top: 30px; color: white; text-align: left; font-size: 1em; line-height: 1.4;position: relative; top: -390px; left: 900px; margin-bottom: 50px; margin-bottom: 40px;">
+            <p style="font-size: 1.1em; line-height: 1.8; position: relative; left: 850px; line-height: 1.3em; margin-bottom: 20px;"></p>
+                <strong>Innovation</strong> <br>This is the spark that ignites new ideas and solutions,<br> driving business growth and staying ahead of the curve.</p>
+        <p style="font-size: 1.1em; line-height: 1.8; position: relative; left: 850px; line-height: 1.3em; margin-bottom: 30px;"></p>
+            <strong>Service</strong> <br>This is the heartbeat of our company, delivering exceptional <br>value and support to our clients, exceeding expectations, <br>and building lasting relationships.</p>
+        <p style="font-size: 1.1em; line-height: 1.8; position: relative; left: 850px; line-height: 1.3em; margin-bottom: 40px;"></p>
+            <strong>Teamwork</strong> <br>This is the glue that holds us together, fostering collaboration,<br> open communication, and collective expertise to achieve <br> shared goals and drive success.</p>
+    </div>
+</div>
+</div>
+
+
+    <script>
+        // JavaScript for slider functionality
+        const slides = document.querySelectorAll('.slides img');
+        let currentSlide = 0;
+
+        function showNextSlide() {
+            slides[currentSlide].style.opacity = 0; // Hide current slide
+            currentSlide = (currentSlide + 1) % slides.length; // Move to the next slide
+            slides[currentSlide].style.opacity = 1; // Show next slide
+        }
+
+        // Change slide every 4 seconds
+        setInterval(showNextSlide, 5000);
+    </script>
+
+    <!-- Projects Summary Section -->
+<div class="projects-summary" style="width: 100%; background-color: #f9f9f9; color: #000; padding: 40px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <h2 style="font-size: 2.5em; margin-bottom: 20px;">Our Projects</h2>
+    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 20px;">
+        <!-- Ongoing Projects -->
+        <div style="flex: 1; text-align: center;">
+            <h3 style="font-size: 2em; color: #000;">Ongoing</h3>
+            <p id="ongoingCount" style="font-size: 3em; font-weight: bold; color: rgb(20, 241, 0);">58</p>
+        </div>
+        <!-- Completed Projects -->
+        <div style="flex: 1; text-align: center;">
+            <h3 style="font-size: 2em; color: #000;">Completed</h3>
+            <p id="completedCount" style="font-size: 3em; font-weight: bold; color: rgb(20, 241, 0);">202</p>
+        </div>
+        <!-- Under Review Projects -->
+        <div style="flex: 1; text-align: center;">
+            <h3 style="font-size: 2em; color: #000;">Under Review</h3>
+            <p id="reviewCount" style="font-size: 3em; font-weight: bold; color: rgb(20, 241, 0);">34</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to animate counting
+    function animateCount(id, target) {
+        const element = document.getElementById(id);
+        let count = 0;
+        const interval = setInterval(() => {
+            count += Math.ceil(target / 100); // Increment by a fraction of the target
+            if (count >= target) {
+                count = target; // Ensure it doesn't exceed the target
+                clearInterval(interval); // Stop the animation
+            }
+            element.textContent = count; // Update the displayed number
+        }, 20); // Update every 20ms
+    }
+
+    // Function to check if an element is in the viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Add scroll event listener
+    let hasAnimated = false; // Ensure animation runs only once
+    document.addEventListener('scroll', function () {
+        const section = document.querySelector('.projects-summary');
+        if (isInViewport(section) && !hasAnimated) {
+            hasAnimated = true;
+            animateCount('ongoingCount', 58); // Ongoing projects
+            animateCount('completedCount', 202); // Completed projects
+            animateCount('reviewCount', 34); // Under review projects
+        }
+    });
+</script>
+
+<!-- Customer Feedback and Review Rating Section -->
+<div class="reviews-section" style="width: 100%; background-color: #f9f9f9; color: #000; padding: 40px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <h2 style="font-size: 2.5em; margin-bottom: 20px;">Customer Feedback</h2>
+    <p style="font-size: 1.2em; margin-bottom: 40px; color: #555;">Here's what our customers are saying about us:</p>
+    <div class="reviews-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <!-- Row 1: Review 1, 2, 6 -->
+        <!-- Review 1 -->
+        <div class="review fade-in" style="flex: 1; max-width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+            <p style="font-size: 1.2em; font-style: italic;">"AuraQ has transformed our business with their innovative solutions. Highly recommended!"</p>
+            <p style="font-size: 1em; font-weight: bold; margin-top: 10px;">- John Doe</p>
+            <p style="font-size: 1.2em; color: rgb(20, 241, 0);">★★★★★</p>
+        </div>
+        <!-- Review 2 -->
+        <div class="review fade-in" style="flex: 1; max-width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+            <p style="font-size: 1.2em; font-style: italic;">"Exceptional service and support. The team is professional and reliable."</p>
+            <p style="font-size: 1em; font-weight: bold; margin-top: 10px;">- Jane Smith</p>
+            <p style="font-size: 1.2em; color: rgb(20, 241, 0);">★★★★★</p>
+        </div>
+        <!-- Review 6 -->
+        <div class="review fade-in" style="flex: 1; max-width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+            <p style="font-size: 1.2em; font-style: italic;">"Fantastic customer service and innovative solutions. Highly satisfied!"</p>
+            <p style="font-size: 1em; font-weight: bold; margin-top: 10px;">- Emily Davis</p>
+            <p style="font-size: 1.2em; color: rgb(20, 241, 0);">★★★★★</p>
+        </div>
+    </div>
+    <!-- Row 2: Review 3, 4, 5 -->
+    <div class="reviews-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+        <!-- Review 3 -->
+        <div class="review fade-in" style="flex: 1; max-width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+            <p style="font-size: 1.2em; font-style: italic;">"Their expertise in IT solutions is unmatched. We are very satisfied with their work."</p>
+            <p style="font-size: 1em; font-weight: bold; margin-top: 10px;">- Michael Brown</p>
+            <p style="font-size: 1.2em; color: rgb(20, 241, 0);">★★★★★</p>
+        </div>
+        <!-- Review 4 -->
+        <div class="review fade-in" style="flex: 1; max-width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+            <p style="font-size: 1.2em; font-style: italic;">"The team at AuraQ is incredibly talented and professional. Highly recommended!"</p>
+            <p style="font-size: 1em; font-weight: bold; margin-top: 10px;">- Sarah Lee</p>
+            <p style="font-size: 1.2em; color: rgb(20, 241, 0);">★★★★★</p>
+        </div>
+        <!-- Review 5 -->
+        <div class="review fade-in" style="flex: 1; max-width: 300px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); background-color: #ffffff; opacity: 0; transform: translateY(20px); transition: all 1s ease-in-out;">
+            <p style="font-size: 1.2em; font-style: italic;">"AuraQtek's solutions have streamlined our operations and improved efficiency."</p>
+            <p style="font-size: 1em; font-weight: bold; margin-top: 10px;">- David Wilson</p>
+            <p style="font-size: 1.2em; color: rgb(20, 241, 0);">★★★★★</p>
+        </div>
+    </div>
+</div>
+    
+</div>
+<script>
+    // Function to check if an element is in the viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Add scroll event listener to fade in reviews
+    document.addEventListener('scroll', function () {
+        const reviews = document.querySelectorAll('.review');
+        reviews.forEach((review) => {
+            if (isInViewport(review)) {
+                review.style.opacity = '1';
+                review.style.transform = 'translateY(0)';
+            } else {
+                // Reset animation when the review leaves the viewport
+                review.style.opacity = '0';
+                review.style.transform = 'translateY(20px)';
+            }
+        });
+    });
+</script>
+<!-- Contact Information Section -->
+<div style="width: 100%; background-color: #1a1a1a; color: white; padding: 40px; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <h2 style="font-size: 2em; margin-bottom: 20px;">Contact Us</h2>
+    <p style="font-size: 1.2em; margin-bottom: 10px;">📍 Address: 123 AuraQ Street, Greater Accra Region-Madina, Country</p>
+    <p style="font-size: 1.2em; margin-bottom: 10px;">📞 Phone: +233 240 102 340</p>
+    <p style="font-size: 1.2em; margin-bottom: 10px;">📧 Email: <a href="mailto:info@auraqdigitalkonsult.com" style="color: rgb(20, 241, 0); text-decoration: none;">info@auraqtek.com</a></p>
+    <p style="font-size: 1.2em;">🌐 Website: <a href="https://www.auraqdigitalkonsult.com" style="color: rgb(20, 241, 0); text-decoration: none;">www.auraqtek.com</a></p>
+</div>
+
+<!-- Footer Section -->
+<footer style="width: 100%; background-color: #000000; color: white; text-align: center; padding: 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <p>&copy; 2025 @AuraQ Digital Konsult. All rights reserved.</p>
+</footer>
+
+<!-- Add this script before </body> -->
+<!-- filepath: c:\Users\SSIRTIMO\Desktop\pendulum-spaces\Pendulum Spaces - Real Estate in Ghana.html -->
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('.nav-links');
+  menuToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('show');
+    menuToggle.classList.toggle('active');
+  });
+  // Hide menu on link click (mobile)
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+      menuToggle.classList.remove('active');
+    });
+  });
+  // Optional: Hide navLinks if window is resized to desktop
+  window.addEventListener('resize', () => {
+    if(window.innerWidth > 900) {
+      navLinks.classList.remove('show');
+      menuToggle.classList.remove('active');
+    }
+  });
+</script>
+
+<script>
+  // Hero content slider animation
+  const heroContents = document.querySelectorAll('.hero-content');
+  let currentHero = 0;
+  function showHeroContent(index) {
+    heroContents.forEach((el, i) => {
+      el.classList.toggle('active', i === index);
+    });
+  }
+  function nextHeroContent() {
+    currentHero = (currentHero + 1) % heroContents.length;
+    showHeroContent(currentHero);
+  }
+  // Initialize
+  showHeroContent(0);
+  setInterval(nextHeroContent, 7000); // Change every 7 seconds (was 4 seconds)
+</script>
+
+</body>
+</html>
